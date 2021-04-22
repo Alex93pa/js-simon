@@ -4,10 +4,16 @@ var randomNum = [];
 var numeriUtente = [];
 var numeriIndovinati = [];
 
-var time = 5;
+var numeriInseriti = 5;
 
 
-completerandomNum();
+while (randomNum.length < numeriInseriti) {
+    var numeroComputer = numeroRandom();
+    if (randomNum.indexOf(numeroComputer) === -1) {
+        randomNum.push(numeroComputer)
+    }
+}
+
 
 alert("Ecco i numeri da ricordare: " + randomNum.join(", "));
 
@@ -18,6 +24,7 @@ var timerCountdown = setInterval(function(){
     document.getElementById("countdown").innerHTML = "Hai ancora " + (30 - timerStart);
 }, 1000)
 
+
 if (timerStart === 30) {
     clearInterval(timerCountdown);
 }
@@ -25,14 +32,7 @@ if (timerStart === 30) {
 setTimeout(game, 30000);
 
 
-function completerandomNum() {
-    while (randomNum.length < time) {
-        var numeroComputer = numeroRandom();
-        if (randomNum.indexOf(numeroComputer) === -1) {
-            randomNum.push(numeroComputer)
-        }
-    }
-}
+
 
 function numeroRandom() {
     var numero = Math.ceil(Math.random() * 100);
@@ -40,7 +40,7 @@ function numeroRandom() {
 }
 
 function game() {
-    while (numeriUtente.length < time) {
+    while (numeriUtente.length < numeriInseriti) {
         var numeroInput = parseInt(prompt("Inserisci il " + (numeriUtente.length + 1) + "° numero"));
         pushNumberChecked(numeroInput);
     }
@@ -48,7 +48,7 @@ function game() {
     if (numeriIndovinati.length > 0) {
         alert("Hai indovinato " + numeriIndovinati.length + " numeri: " + numeriIndovinati.join(" - "))
     } else {
-        alert("Non hai indovinato nessun numero. Riprova")
+        alert("Non hai indovinato nessun numero. Ricomincia")
     }
 }
 
